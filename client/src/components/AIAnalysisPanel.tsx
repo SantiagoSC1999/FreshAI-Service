@@ -25,7 +25,6 @@ interface AnalysisData {
 
 interface AIAnalysisPanelProps {
   ticketId: string;
-  ticketData?: any;
   onClose: () => void;
 }
 
@@ -43,7 +42,7 @@ const confidenceColors: Record<string, string> = {
   low: '#ef4444',
 };
 
-const AIAnalysisPanel: React.FC<AIAnalysisPanelProps> = ({ ticketId, ticketData, onClose }) => {
+const AIAnalysisPanel: React.FC<AIAnalysisPanelProps> = ({ ticketId, onClose }) => {
   const [analysis, setAnalysis] = useState<AnalysisData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -61,7 +60,7 @@ const AIAnalysisPanel: React.FC<AIAnalysisPanelProps> = ({ ticketId, ticketData,
           setError(response.analysis.message || 'Failed to analyze ticket');
         }
       } catch (err: any) {
-        console.error('Error analyzing ticket:', err);
+        console.error('Front Error analyzing ticket:', err);
         setError(err.message || 'Failed to analyze ticket');
       } finally {
         setLoading(false);
